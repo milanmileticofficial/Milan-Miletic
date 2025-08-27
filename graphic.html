@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Milan Miletic — Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-overlay: rgba(0,0,0,.35);
+      --text: #f5f5f5;
+      --muted: #d6d6d6;
+      --accent: #ffffff;
+      --maxw: 1200px;
+    }
+
+    *,*::before,*::after{ box-sizing: border-box; }
+    html, body{ height:100%; margin:0; font-family: 'Poppins', sans-serif; color: var(--text); line-height: 1.5; }
+    body{
+      background-image: url('slika1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.15) 40%, rgba(0,0,0,.35));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container{ max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    header.site-header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  background: rgba(0,0,0,0.55);  /* providno, malo tamnije */
+  backdrop-filter: blur(6px);     /* blur efekt */
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+    .header-row{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 20px;
+    }
+    .brand{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .brand .logo{
+      width: 36px; height: 36px; border-radius: 50%;
+      overflow: hidden;
+    }
+    nav ul{
+      list-style: none; margin:0; padding:0;
+      display: flex; align-items: center; gap: clamp(12px, 3vw, 28px);
+    }
+    nav a{
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 400;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 6px 4px;
+    }
+.brand:hover span {
+  font-weight: 800; /* bold */
+  color: #fff;      /* malo jača bela boja */
+  transition: all 0.3s ease;
+}
+nav a:hover {
+  font-weight: 800; /* bold */
+  color: #fff;      /* bela kad hover */
+  transition: all 0.3s ease;
+}
+
+    /* Portfolio */
+    section#portfolio{
+      padding: 120px 0 60px;
+    }
+    .box{
+      background: rgba(0,0,0,.6);
+      backdrop-filter: blur(6px);
+      padding: 40px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+    }
+    .box h2{
+      margin-top: 0;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--accent);
+      text-align: center;
+    }
+    .box p{
+      text-align: center;
+      color: var(--accent);
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    .portfolio-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .portfolio-grid img {
+  width: 100%;             /* zauzima širinu ćelije grid-a */
+  height: 400px;           /* fiksna visina za sve slike */
+  object-fit: cover;       /* prilagođava sliku bez deformacije */
+  border-radius: 10px;
+  transition: transform .3s ease;
+  cursor: pointer;
+}
+
+    .portfolio-grid img:hover{
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer.site-footer{
+  background: rgba(0,0,0,0.55);  /* isto kao header */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+  font-size: 14px;
+    }
+    footer.site-footer a{ color: var(--text); text-decoration: none; }
+    footer.site-footer a:hover{ text-decoration: underline; }
+
+    /* Modal za uveličavanje slika */
+    .modal {
+      display: none; 
+      position: fixed;
+      z-index: 1000;
+      padding-top: 60px;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+    .close {
+      position: absolute;
+      top: 20px; right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover { color: #bbb; }
+	html {
+  scroll-behavior: smooth;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="header-row container">
+      <a href="index.html#portfolio" class="brand">
+  <span class="logo"><img src="slika2.png" style="width:100%; height:100%; object-fit:cover;"></span>
+  <span>&larr; Home Portfolio</span>
+</a>
+
+      <nav>
+        <ul>
+          <li><a href="#">Portfolio | Graphic design</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <div class="container">
+      <!-- Prvi projekat -->
+<div class="box">
+  <h2>CD design „Cowboy Carter“</h2>
+  <p>Za dizajn ovog CD-a „Cowboy Carter“ od Beyoncé želeo sam da spojim estetiku američkog zapada sa modernim vizuelnim pristupom. Inspiraciju sam pronašao u simbolima kaubojskog života – teksturama kože, tonovima prašnjavih pejzaža i rustičnim tipografskim rešenjima. Istovremeno, dodao sam savremene grafičke elemente kako bi dizajn zadržao aktuelnost i vizuelnu privlačnost.</p>
+  <div class="portfolio-grid">
+    <img src="designslika13.jpg" alt="Art 1">
+    <img src="designslika14.jpg" alt="Art 2">
+    <img src="designslika15.jpg" alt="Art 3">
+  </div>
+  
+</div>
+
+<!-- Drugi projekat -->
+<div class="box">
+  <h2>Paris 2024 lOGO</h2>
+  <p>Prilikom dizajniranja svoje verzije logotipa za Olimpijske igre u Parizu 2024, želeo sam da spojim modernu estetiku sa simbolikom samog grada i duha olimpizma. Fokusirao sam se na čiste linije i jasne geometrijske oblike, kako bi logo bio prepoznatljiv i lako primenljiv u različitim medijima.</p>
+  <div class="portfolio-grid">
+    <img src="designslika16.jpg" alt="Kohezija 1">
+    <img src="designslika17.jpg" alt="Kohezija 2">
+    <img src="designslika18.jpg" alt="Kohezija 3">
+    
+  </div>
+</div>
+
+<!-- Drugi projekat -->
+<div class="box">
+  <h2>NONI logo</h2>
+  <p>Za dizajn vizuelnog identiteta Noni igraonice koristio sam kombinaciju žute i crne boje kako bih stvorio energičan i privlačan izgled koji odmah privlači pažnju dece i roditelja. Žuta boja simbolizuje zabavu, kreativnost i radost, dok crna dodaje kontrast i moderni, prepoznatljivi izgled. Kombinovanjem ovih elemenata, logo je postao upečatljiv i lako pamtljiv, savršen za brendiranje igraonice.</p>
+  <div class="portfolio-grid">
+    <img src="designslika19.jpg" alt="Kohezija 1">
+    <img src="designslika20.jpg" alt="Kohezija 2">
+    <img src="designslika21.jpg" alt="Kohezija 3">
+    
+  </div>
+</div>
+
+<!-- Drugi projekat -->
+<div class="box">
+  <h2>USNILA logo</h2>
+  <p>Za dizajn logoa Usnila, brenda posvećenog posteljini i proizvodima za spavanje, inspiraciju sam pronašao u motivu pauna, simbola elegancije i mirnog sna. Kroz stilizovani oblik paunovog pera, logo odražava sofisticiranost i udobnost proizvoda, dok nežne linije i detalji sugerišu spokoj i kvalitetan odmor.</p>
+  <div class="portfolio-grid">
+    <img src="designslika22.jpg" alt="Kohezija 1">
+    <img src="designslika23.jpg" alt="Kohezija 2">
+    <img src="designslika24.jpg" alt="Kohezija 3">
+    
+  </div>
+</div>
+
+<!-- Drugi projekat -->
+<div class="box">
+  <h2>FOX logo</h2>
+  <p>Za dizajn Fox logoa, brenda pametnih satova, inspiraciju sam pronašao u agilnosti i preciznosti lisice. Logo kombinuje minimalistički, geometrijski stil sa modernim linijama, reflektujući tehnološku sofisticiranost i funkcionalnost uređaja. Oštri konturi i elegantna silueta lisice prenose osećaj brzine, inteligencije i pouzdanosti proizvoda.</p>
+  <div class="portfolio-grid">
+    <img src="designslika25.jpg" alt="Kohezija 1">
+    <img src="designslika26.jpg" alt="Kohezija 2">
+    <img src="designslika27.jpg" alt="Kohezija 3">
+    
+  </div>
+</div>
+
+
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="imgModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <p>© <span id="year"></span> Milan Miletic. All rights reserved.</p>
+    
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Modal slika
+    const modal = document.getElementById("imgModal");
+    const modalImg = document.getElementById("modalImage");
+    const span = document.querySelector(".close");
+    const images = document.querySelectorAll(".portfolio-grid img");
+
+    images.forEach(img => {
+      img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+      }
+    });
+
+    span.onclick = function() { modal.style.display = "none"; }
+    modal.onclick = function(e) {
+      if(e.target === modal){ modal.style.display = "none"; }
+    }
+  </script>
+
+</body>
+</html>

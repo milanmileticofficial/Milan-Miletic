@@ -1,0 +1,467 @@
+﻿<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Milan Miletic — Grafički dizajner i umetnik</title>
+
+  <!-- Modern, clean font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-overlay: rgba(0,0,0,.35);
+      --text: #f5f5f5;
+      --muted: #d6d6d6;
+      --accent: #ffffff;
+      --maxw: 1200px;
+    }
+
+    *,*::before,*::after{ box-sizing: border-box; }
+    html, body{ height:100%; margin:0; font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); line-height: 1.5; }
+    body{
+      background-image: url('slika1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.15) 40%, rgba(0,0,0,.35));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container{ max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+    header.site-header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  background: rgba(0,0,0,0.55); /* providno i malo tamnije */
+  backdrop-filter: blur(6px);     /* blur efekt */
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+    .header-row{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 20px;
+    }
+
+    .brand{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .brand .logo{
+      width: 36px; height: 36px; border-radius: 50%;
+      display: grid; place-items: center;
+      overflow: hidden;
+    }
+
+    nav ul{
+      list-style: none; margin:0; padding:0;
+      display: flex; align-items: center; gap: clamp(12px, 3vw, 28px);
+    }
+    nav a{
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 400;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: font-weight .15s ease, opacity .15s ease, transform .15s ease;
+      display: inline-block;
+      padding: 6px 4px;
+    }
+    nav a:hover,
+    nav a:focus-visible{
+      font-weight: 800;
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+	header .brand:hover {
+  font-weight: 800; /* bold */
+  color: #fff;      /* bela */
+  transition: all 0.3s ease;
+}
+
+    .hero{
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-inner{ 
+      display: grid; 
+      gap: 12px; 
+      align-items: center; 
+      justify-items: center; 
+    }
+
+    /* Home sekcija */
+    .home-section,
+    #about,
+    #portfolio,
+    #contact {
+      color: var(--text);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 40px;
+      border-radius: 12px;
+      margin: 60px auto;
+      text-align: center;
+    }
+    .home-section p {
+      font-size: clamp(18px, 2.4vw, 26px);
+      line-height: 1.6;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    /* Slika između Home i About */
+    .image-section {
+      display: flex;
+      justify-content: center;
+      margin: 60px auto; /* jednak razmak */
+    }
+    .middle-image {
+      max-width: 800px; width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: transform .2s;
+    }
+    .middle-image:hover { transform: scale(1.02); }
+
+    .title{
+      margin:0;
+      font-weight: 800;
+      font-size: clamp(36px, 8vw, 96px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .subtitle{
+      margin:0;
+      font-weight: 300;
+      font-size: clamp(16px, 2.6vw, 24px);
+      color: var(--muted);
+      letter-spacing: .25em;
+      text-transform: uppercase;
+    }
+
+    footer.site-footer{
+  background: rgba(0,0,0,0.55);  /* isto kao header */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+  font-size: 14px;
+    }
+
+    footer.site-footer a{
+      color: var(--text);
+      text-decoration: none;
+    }
+    footer.site-footer a:hover{
+      text-decoration: underline;
+    }
+
+    /* About sekcija */
+    #about {
+      color: var(--text);
+      background: rgba(0, 0, 0, 0.55);
+      padding: 40px;
+      border-radius: 12px;
+      margin: 60px auto;
+    }
+    #about h2 {
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-weight: 600;
+      font-size: 28px;
+    }
+    #about blockquote {
+      font-style: italic;
+      border-left: 3px solid var(--accent);
+      padding-left: 12px;
+      margin-left: 0;
+      color: var(--muted);
+    }
+    #about a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    #about a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 560px){
+      .header-row{ flex-wrap: wrap; justify-content: center; gap: 8px 16px; }
+      .brand{ order: -1; }
+      #about { padding: 20px; margin: 40px 10px; }
+    }
+
+    section{ scroll-margin-top: 20svh; }
+    .spacer{ height: 60vh; }
+
+    a{ text-underline-offset: 3px; }
+    a:hover{ text-decoration: none; }
+    a:focus-visible{ outline: 2px dashed rgba(255,255,255,.7); outline-offset: 3px; }
+
+    html{ scroll-behavior: smooth; }
+
+    /* Modal za prikaz slike */
+    .modal {
+      display: none; 
+      position: fixed;
+      z-index: 1000;
+      padding-top: 60px;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+    .close {
+      position: absolute;
+      top: 20px; right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover { color: #bbb; }
+	
+	#portfolio {
+  color: var(--text);
+  background: rgba(0,0,0,0.55);
+  padding: 40px;
+  border-radius: 12px;
+  margin: 60px auto;
+  text-align: center;
+}
+
+#portfolio h2 {
+  color: var(--accent);
+  font-size: 28px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Grid */
+.portfolio-categories {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* Svaka kategorija */
+.category-image {
+  width: 350px;   /* ista širina */
+  height: 220px;  /* ista visina */
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.category-image:hover {
+  transform: scale(1.05);
+  filter: brightness(0.8);
+}
+
+/* Overlay tekst */
+.overlay-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  padding: 12px;
+  text-align: center;
+}
+#contact {
+  color: var(--text);
+  background: rgba(0,0,0,0.55);
+  padding: 40px;
+  border-radius: 12px;
+  margin: 60px auto;
+  text-align: center;
+}
+
+#contact h2 {
+  color: var(--accent);
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  font-size: 18px;
+  margin: 10px 0;
+  color: white;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  <header class="site-header" role="banner">
+    <div class="header-row container">
+      <a href="#hero" class="brand" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit;">
+        <span class="logo">
+          <img src="slika2.png" style="width: 100%; height: 100%; object-fit: cover;">
+        </span>
+        <span>Milan Miletic</span>
+      </a>
+
+      <nav aria-label="Glavna navigacija">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero sekcija -->
+  <main id="hero" class="hero">
+    <div class="hero-inner container">
+      <h1 class="title">Milan Miletic</h1>
+      <p class="subtitle">Grafički dizajner i umetnik</p>
+    </div>
+  </main>
+
+  <!-- Home sekcija -->
+  <section id="home" class="container home-section">
+    <p>Dobrodošli u moj svet dizajna i ilustracije. <br>
+	Ovo je prostor gde mašta postaje vizuelna priča.</p>
+  </section>
+
+  <!-- Slika između Home i About -->
+  <section class="container image-section">
+    <img src="slika3.jpg" alt="Milan Miletic" class="middle-image">
+  </section>
+
+  <!-- Modal za prikaz slike -->
+  <div id="imgModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <!-- O MENI sekcija -->
+  <section id="about" class="container">
+    <h2>O meni</h2>
+	<p>Oduvek sam osećao da sam umetnik. Još kao dete, dok sam se igrao sa zemljom, zamišljao sam svemir, letelice i svetove koji ne postoje, ali koje sam ja mogao da stvorim. Ta potreba da oblikujem i da maštom gradim nove realnosti pratila me je kroz odrastanje i prirodno me vodila ka umetnosti.</p>
+    <p>Student sam završne godine grafičkog dizajna na Akademiji strukovnih studija Politehnika.</p>
+    <p>Kreator sam vizuelnih rešenja i posedujem poznavanje Adobe programa. Kombinovanjem kreativnosti i tehničkih veština, težim da ostvarim estetski privlačne i funkcionalne dizajne koji komuniciraju jasne poruke i ostavljaju jak vizuelni utisak.</p>
+    <p>Takođe, vešt sam u produkciji i montaži kratkih video klipova za društvene mreže, koristeći CapCut.</p>
+    <blockquote>
+      „Umetnost doživljavam kao prostor između realnog i zamišljenog, gde materijal postaje svedok unutrašnjih stanja, ali i trag vremena koji tek dolazi.“
+    </blockquote>
+    
+  </section>
+
+  <section id="portfolio" class="container">
+  <h2>Portfolio</h2>
+  <div class="portfolio-categories">
+    <div class="category">
+      <a href="art.html">
+        <div class="category-image" style="background-image: url('art1.jpg');">
+          <div class="overlay-text">Art</div>
+        </div>
+      </a>
+    </div>
+    <div class="category">
+      <a href="graphic.html">
+        <div class="category-image" style="background-image: url('graphic1.jpg');">
+          <div class="overlay-text">Graphic Design</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  <section id="contact" class="container">
+  <h2>Kontakt</h2>
+  <div class="contact-info">
+    <p><strong>Telefon:</strong> +381 69 210 2085</p>
+    <p><strong>E-mail:</strong> milanmileticofficial@gmail.com</p>
+    <p><strong>Instagram:</strong> @milanmileticofficial</p>
+    <p><strong>Lokacija:</strong> Dalmatinska 44, Beograd</p>
+  </div>
+</section>
+
+
+  <footer class="site-footer" role="contentinfo">
+    <p>© <span id="year"></span> Milan Miletic. All rights reserved.</p>
+    
+  </footer>
+
+  <script>
+    // Godina u footeru
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Modal slika
+    const modal = document.getElementById("imgModal");
+    const img = document.querySelector(".middle-image");
+    const modalImg = document.getElementById("modalImage");
+    const span = document.querySelector(".close");
+
+    img.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+    }
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    modal.onclick = function(e) {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+
+

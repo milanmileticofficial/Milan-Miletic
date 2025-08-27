@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Milan Miletic — Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-overlay: rgba(0,0,0,.35);
+      --text: #f5f5f5;
+      --muted: #d6d6d6;
+      --accent: #ffffff;
+      --maxw: 1200px;
+    }
+
+    *,*::before,*::after{ box-sizing: border-box; }
+    html, body{ height:100%; margin:0; font-family: 'Poppins', sans-serif; color: var(--text); line-height: 1.5; }
+    body{
+      background-image: url('slika1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.15) 40%, rgba(0,0,0,.35));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container{ max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    header.site-header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  background: rgba(0,0,0,0.55);  /* providno, malo tamnije */
+  backdrop-filter: blur(6px);     /* blur efekt */
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+    .header-row{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 20px;
+    }
+    .brand{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .brand .logo{
+      width: 36px; height: 36px; border-radius: 50%;
+      overflow: hidden;
+    }
+    nav ul{
+      list-style: none; margin:0; padding:0;
+      display: flex; align-items: center; gap: clamp(12px, 3vw, 28px);
+    }
+    nav a{
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 400;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 6px 4px;
+    }
+	.brand:hover span {
+  font-weight: 800; /* bold */
+  color: #fff;      /* malo jača bela boja */
+  transition: all 0.3s ease;
+}
+nav a:hover {
+  font-weight: 800; /* bold */
+  color: #fff;      /* bela kad hover */
+  transition: all 0.3s ease;
+}
+
+
+    /* Portfolio */
+    section#portfolio{
+      padding: 120px 0 60px;
+    }
+    .box{
+      background: rgba(0,0,0,.6);
+      backdrop-filter: blur(6px);
+      padding: 40px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+    }
+    .box h2{
+      margin-top: 0;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--accent);
+      text-align: center;
+    }
+    .box p{
+      text-align: center;
+      color: var(--accent);
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    .portfolio-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .portfolio-grid img{
+      width: 100%;
+      border-radius: 10px;
+      transition: transform .3s ease;
+      cursor: pointer;
+    }
+    .portfolio-grid img:hover{
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer.site-footer{
+  background: rgba(0,0,0,0.55);  /* isto kao header */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+  font-size: 14px;
+    }
+    footer.site-footer a{ color: var(--text); text-decoration: none; }
+    footer.site-footer a:hover{ text-decoration: underline; }
+
+    /* Modal za uveličavanje slika */
+    .modal {
+      display: none; 
+      position: fixed;
+      z-index: 1000;
+      padding-top: 60px;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+    .close {
+      position: absolute;
+      top: 20px; right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover { color: #bbb; }
+	html {
+  scroll-behavior: smooth;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="header-row container">
+      <a href="index.html#portfolio" class="brand">
+  <span class="logo"><img src="slika2.png" style="width:100%; height:100%; object-fit:cover;"></span>
+  <span>&larr; Home Portfolio</span>
+</a>
+
+      <nav>
+        <ul>
+          <li><a href="#">Portfolio | Art</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <div class="container">
+      <!-- Prvi projekat -->
+<div class="box">
+  <h2>Predmeti vremena</h2>
+  <p>“Kazaljke stoje tamo gde sam počeo.”<br><br>
+
+Pomisao o objektima koji istovremeno deluju kao da pripadaju sadašnjem trenutku, ali i nekoj dalekoj budućnosti, inspirisala me je da razvijem umetnički stil koji se bavi estetikom propadanja i prolaznosti.
+
+Moja odlučnost da kreiram sopstvenu kreaciju za dolazak na Belgrade Fashion Week bila je čin kojim sam želeo da svoje prisustvo pretvorim u umetnički izraz.
+
+Ova kreacija postaje deo priče mojih novih radova.</p>
+  <div class="portfolio-grid">
+    <img src="artslika1.jpg" alt="Art 1">
+    <img src="artslika2.jpg" alt="Art 2">
+    <img src="artslika3.jpg" alt="Art 3">
+    <img src="artslika4.jpg" alt="Art 4">
+    <img src="artslika5.jpg" alt="Art 5">
+    <img src="artslika6.jpg" alt="Art 6">
+  </div>
+
+  <!-- Video ispod fotografija sa marginom za razmak -->
+  <div style="text-align: center; margin: 50px 0 0 0;">
+  <iframe 
+  width="600" height="400" 
+  src="https://www.youtube.com/embed/CDEtlGj5ris?si=hStYpgihjtIHxRbo" 
+  title="YouTube video player" 
+  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+  referrerpolicy="strict-origin-when-cross-origin" 
+  allowfullscreen>
+  </iframe>
+    
+  </div>
+</div>
+
+<!-- Drugi projekat -->
+<div class="box">
+  <h2>Kohezija Trio</h2>
+  <p>"Kohezija Trio" je umetnički rad koji spaja prošlost, sadašnjost i budućnost kroz spoj klasične skulpture i savremene grafike i slikarstva.
+
+Inspirisan posetom Rimu 2022. godine i delima Berninija, rad simbolično prikazuje tri aspekta ljudske psihe, maštu, emociju i akciju. Korišćenjem digitalnih alata i autorske tipografije, kao i akrilnih boja u slici, stvoreno je delo koje istražuje neprekinan tok kreativnosti, prikazan kroz crne glave iz kojih teče crna tečnost.
+
+Ovaj rad poziva na razmišljanje o ulozi umetnosti u savremenom društvu i njenoj moći da poveže ljude, epohe i ideje.</p>
+  <div class="portfolio-grid">
+    <img src="artslika7.jpg" alt="Kohezija 1">
+    <img src="artslika8.jpg" alt="Kohezija 2">
+    <img src="artslika9.jpg" alt="Kohezija 3">
+    <img src="artslika10.jpg" alt="Kohezija 4">
+    <img src="artslika11.jpg" alt="Kohezija 5">
+    <img src="artslika12.jpg" alt="Kohezija 6">
+  </div>
+</div>
+
+
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="imgModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <p>© <span id="year"></span> Milan Miletic. All rights reserved.</p>
+    
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Modal slika
+    const modal = document.getElementById("imgModal");
+    const modalImg = document.getElementById("modalImage");
+    const span = document.querySelector(".close");
+    const images = document.querySelectorAll(".portfolio-grid img");
+
+    images.forEach(img => {
+      img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+      }
+    });
+
+    span.onclick = function() { modal.style.display = "none"; }
+    modal.onclick = function(e) {
+      if(e.target === modal){ modal.style.display = "none"; }
+    }
+  </script>
+
+</body>
+</html>
